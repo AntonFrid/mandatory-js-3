@@ -75,17 +75,17 @@ function subBreedReq(){
   let req2 = new XMLHttpRequest();
 
   if (this.textContent !== undefined){
-    window.location.hash = 'sub-' + '-' + previousBreed + '-' + this.textContent;
+    window.location.hash = 'sub' + '-' + previousBreed + '-' + this.textContent;
   }
 
 
   let hashSplit = window.location.hash.split('-');
   console.log(hashSplit);
 
-  breedTitle.textContent = hashSplit[3].charAt(0).toUpperCase() + hashSplit[3].slice(1) + '-' + hashSplit[2];
+  breedTitle.textContent = hashSplit[2].charAt(0).toUpperCase() + hashSplit[2].slice(1) + '-' + hashSplit[2];
 
   req2.addEventListener('load', reqListener2);
-  req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[2] + '/' + hashSplit[3] + '/images/random/3');
+  req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[1] + '/' + hashSplit[2] + '/images/random/3');
   req2.send();
   console.log(this.textContent);
   removeCurImg();
@@ -142,21 +142,21 @@ function getBreedImg(){
   let req2 = new XMLHttpRequest();
 
   if (this.textContent !== undefined){
-    window.location.hash = 'breed-' + '-' + this.textContent;
+    window.location.hash = 'breed' + '-' + this.textContent;
   }
 
   let hashSplit = window.location.hash.split('-');
   console.log(hashSplit);
-  previousBreed = hashSplit[2];
+  previousBreed = hashSplit[1];
 
-  breedTitle.textContent = hashSplit[2].charAt(0).toUpperCase() + hashSplit[2].slice(1);
+  breedTitle.textContent = hashSplit[1].charAt(0).toUpperCase() + hashSplit[1].slice(1);
 
   req.addEventListener('load', reqListener3);
-  req.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[2] + '/list');
+  req.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[1] + '/list');
   req.send();
   console.log(this.textContent);
   req2.addEventListener('load', reqListener2);
-  req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[2] + '/images/random/3');
+  req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[1] + '/images/random/3');
   req2.send();
 
   removeCurImg();
