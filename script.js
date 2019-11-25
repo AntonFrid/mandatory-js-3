@@ -82,7 +82,7 @@ function subBreedReq(){
   let hashSplit = window.location.hash.split('-');
   console.log(hashSplit);
 
-  breedTitle.textContent = hashSplit[2].charAt(0).toUpperCase() + hashSplit[2].slice(1) + '-' + hashSplit[2];
+  breedTitle.textContent = hashSplit[2].charAt(0).toUpperCase() + hashSplit[2].slice(1) + '-' + hashSplit[1];
 
   req2.addEventListener('load', reqListener2);
   req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[1] + '/' + hashSplit[2] + '/images/random/3');
