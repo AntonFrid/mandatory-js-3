@@ -114,3 +114,8 @@ button:hover{
   background-color: #294851;
   color: #f9ad6a;
 }
+
+li:hover{
+  color: #294851;
+  text-decoration: underline;
+}
