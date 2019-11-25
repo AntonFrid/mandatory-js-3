@@ -1,8 +1,28 @@
 let imgContainer = document.getElementById('img-container');
 let breedList = document.getElementById('breed-list');
+let breedTitle = document.getElementById('breed-title');
+let refBtn = document.getElementById('ref-btn');
+
 let data;
 let imageArray;
 let previousBreed;
+
+refBtn.addEventListener('click', function(){
+  breedList.innerHTML = '';
+  imgContainer.innerHTML = '';
+
+  if (window.location.hash.includes('breed')){
+    getBreedImg();
+    console.log('breed');
+  }
+  else if (window.location.hash.includes('sub')) {
+    subBreedReq();
+    console.log('sub');
+  }
+  else{
+    defaultRender();
+  }
+})
 
 if (window.location.hash.includes('breed')){
   getBreedImg();
@@ -62,6 +82,8 @@ function subBreedReq(){
   let hashSplit = window.location.hash.split('-');
   console.log(hashSplit);
 
+  breedTitle.textContent = hashSplit[3].charAt(0).toUpperCase() + hashSplit[3].slice(1) + '-' + hashSplit[2];
+
   req2.addEventListener('load', reqListener2);
   req2.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[2] + '/' + hashSplit[3] + '/images/random/3');
   req2.send();
@@ -71,6 +93,9 @@ function subBreedReq(){
 }
 
 function renderListSub(){
+  let headTitle = document.createElement('h2');
+  headTitle.textContent = 'Sub-Breeds';
+  breedList.appendChild(headTitle);
   for (let dog of subBreedArray){
     let listItem = document.createElement('li');
     let linkItem = document.createElement('a');
@@ -82,6 +107,9 @@ function renderListSub(){
 }
 
 function renderList(){
+  let headTitle = document.createElement('h2');
+  headTitle.textContent = 'Breeds';
+  breedList.appendChild(headTitle);
   for (let dog in breedObj){
     let listItem = document.createElement('li');
     let linkItem = document.createElement('a');
@@ -120,6 +148,8 @@ function getBreedImg(){
   let hashSplit = window.location.hash.split('-');
   console.log(hashSplit);
   previousBreed = hashSplit[2];
+
+  breedTitle.textContent = hashSplit[2].charAt(0).toUpperCase() + hashSplit[2].slice(1);
 
   req.addEventListener('load', reqListener3);
   req.open('GET', 'https://dog.ceo/api/breed/' + hashSplit[2] + '/list');
